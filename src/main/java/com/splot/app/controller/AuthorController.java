@@ -39,7 +39,7 @@ public class AuthorController {
         return responseDtoMapper.mapToDto(author);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<AuthorResponseDto> findAll() {
         return authorService.findAll().stream()
                 .map(responseDtoMapper::mapToDto)
