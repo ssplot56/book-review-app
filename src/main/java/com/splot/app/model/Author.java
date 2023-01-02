@@ -4,8 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.List;
 
 @Entity(name = "authors")
 public class Author {
@@ -14,8 +12,7 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
-    @ManyToMany
-    private List<Book> books;
+    private String country;
 
     public Long getId() {
         return id;
@@ -41,12 +38,12 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public String getCountry() {
+        return country;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
@@ -55,7 +52,7 @@ public class Author {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", books=" + books +
+                ", country='" + country + '\'' +
                 '}';
     }
 }
