@@ -3,11 +3,18 @@ package com.splot.app.controller;
 import com.splot.app.dto.request.BookRequestDto;
 import com.splot.app.dto.response.BookResponseDto;
 import com.splot.app.model.Book;
-import com.splot.app.service.AuthorService;
 import com.splot.app.service.BookService;
 import com.splot.app.service.mapper.RequestDtoMapper;
 import com.splot.app.service.mapper.ResponseDtoMapper;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,16 +23,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
-    private final AuthorService authorService;
     private final ResponseDtoMapper<BookResponseDto, Book> responseDtoMapper;
     private final RequestDtoMapper<BookRequestDto, Book> requestDtoMapper;
 
     public BookController(BookService bookService,
-                          AuthorService authorService,
                           ResponseDtoMapper<BookResponseDto, Book> responseDtoMapper,
                           RequestDtoMapper<BookRequestDto, Book> requestDtoMapper) {
         this.bookService = bookService;
-        this.authorService = authorService;
         this.responseDtoMapper = responseDtoMapper;
         this.requestDtoMapper = requestDtoMapper;
     }
@@ -50,7 +54,7 @@ public class BookController {
 
     @GetMapping("/authors/{id}")
     public List<BookResponseDto> findByAuthor(@PathVariable Long id) {
-        return bookService.findAllByAuthor(authorService.findById(id)).stream()
+        return bookService.findAllByAuthor(id).stream()
                 .map(responseDtoMapper::mapToDto)
                 .collect(Collectors.toList());
     }

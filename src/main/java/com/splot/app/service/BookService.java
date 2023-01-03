@@ -11,7 +11,7 @@ public interface BookService {
 
     List<Book> findAll();
 
-    List<Book> findAllByAuthor(Author author);
+    List<Book> findAllByAuthor(Long authorId);
 
     void deleteById(Long id);
 }
