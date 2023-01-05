@@ -12,9 +12,4 @@ public class BookReviewAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookReviewAppApplication.class, args);
     }
-
-    @Bean
-    public PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
